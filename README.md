@@ -28,3 +28,14 @@ Simply move the sliders to control the different aspects of the generated artwor
 
 When you're happy with your creation, click the **Save** button to download a 1920x1080 PNG file.
 
+### SCREENSHOTS ###
+
+![Design 01](https://github.com/user-attachments/assets/cab27d8d-b9d7-4a82-8e72-a32c0caab477)
+
+![Web_Preview](https://github.com/user-attachments/assets/8abfacef-e444-45fd-b23f-2a62e8f588af)
+
+![generative-art](https://github.com/user-attachments/assets/6d4838f9-763a-4a13-97b0-a453490e4abd)
+
+![generative-art (2)](https://github.com/user-attachments/assets/d3a7789c-8218-4b1b-9c80-3246af5ab2fb)
+
+![generative-art-1920x1080 (12)](https://github.com/user-attachments/assets/e80dee1d-5585-497d-b46c-16fa81a136ce)
