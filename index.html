@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Space+Grotesk%3Awght%40400%3B500%3B700" />
+  <title>Generative Art App</title>
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body { background-color: #101323; }
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px; background: #2f396a;
+      border-radius: 2px; outline: none; cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 16px; height: 16px; background: #607afb;
+      border-radius: 9999px; border: none; margin-top: -6px;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 16px; height: 16px; background: #607afb;
+      border-radius: 9999px; border: none; cursor: pointer;
+    }
+    #artCanvas {
+        display: block; width: 100%; height: 100%;
+    }
+    .spinner {
+        border: 2px solid #fff; border-top: 2px solid transparent;
+        border-radius: 50%; width: 16px; height: 16px;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="relative mx-auto flex w-full max-w-md min-h-screen flex-col bg-[#101323] dark justify-between group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+    <!-- Main content wrapper -->
+    <div class="flex-grow">
+      <!-- Header -->
+      <header class="flex items-center bg-[#101323] p-4 pb-2 justify-between">
+        <button class="text-white flex size-12 shrink-0 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path></svg></button>
+        <h1 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center absolute left-1/2 -translate-x-1/2">Generative Art</h1>
+        <button class="flex items-center justify-center rounded-lg h-12 bg-transparent text-white min-w-0 p-0"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88,88,0,0,0-85.23,66,8,8,0,0,1-15.5-4A103.94,103.94,0,0,1,165,96h39.71L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"></path></svg></button>
+      </header>
+      
+      <!-- GENERATIVE ART CANVAS -->
+      <div class="p-4"><div id="canvas-container" class="relative bg-black aspect-video rounded-lg overflow-hidden"><canvas id="artCanvas"></canvas></div></div>
+
+      <!-- Sliders Section -->
+      <div class="px-4 pb-2 space-y-4"><div id="slider-controls"></div></div>
+      
+      <!-- Action Buttons -->
+      <div class="flex justify-between gap-3 px-4 py-3">
+        <button id="save-btn" class="flex-1 flex gap-2 max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-[#21284a] text-white text-base font-bold leading-normal tracking-[0.015em]"><span id="save-btn-text">Save</span></button>
+        <button onclick="alert('Share functionality not implemented.')" class="flex-1 flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-[#607afb] text-white text-base font-bold leading-normal tracking-[0.015em]"><span>Share</span></button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <footer class="sticky bottom-0">
+      <div class="flex gap-2 border-t border-[#21284a] bg-[#181d35] px-4 pb-3 pt-2">
+        <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-white" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" class="h-8"><path d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"></path></svg></a>
+        <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#8e99cc]" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" class="h-8"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></a>
+        <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#8e99cc]" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" class="h-8"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208Zm-32-80a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z"></path></svg></a>
+        <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#8e99cc]" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256" class="h-8"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg></a>
+      </div>
+      <div class="h-5 bg-[#181d35]"></div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- CONFIGURATION ---
+        const shapeTypes = ['Lines', 'Curved Lines', 'Circles', 'Polygons', 'Dots'];
+        const artParams = {
+            shape: 1,
+            shapeCount: 25,
+            colors: 65,
+            gradients: 20,
+            detail: 10,
+            noise: 5,
+            dynamicBackgrounds: 25,
+        };
+        
+        const sliderConfig = [
+            { id: 'shape', label: 'Shape Type', min: 0, max: shapeTypes.length - 1, value: artParams.shape, isDiscrete: true },
+            { id: 'shapeCount', label: 'Shape Count', min: 1, max: 300, value: artParams.shapeCount },
+            { id: 'detail', label: 'Detail Level', min: 1, max: 20, value: artParams.detail },
+            { id: 'colors', label: 'Color Palette', min: 0, max: 100, value: artParams.colors },
+            { id: 'gradients', label: 'Line Gradients', min: 0, max: 100, value: artParams.gradients },
+            { id: 'noise', label: 'Noise / Distortion', min: 0, max: 50, value: artParams.noise },
+            { id: 'dynamicBackgrounds', label: 'Background', min: 0, max: 100, value: artParams.dynamicBackgrounds }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const canvas = document.getElementById('artCanvas');
+        const sliderControlsContainer = document.getElementById('slider-controls');
+        const saveBtn = document.getElementById('save-btn');
+        const saveBtnText = document.getElementById('save-btn-text');
+
+        // --- CORE RENDER FUNCTION ---
+        function render(targetCanvas, params) {
+            const ctx = targetCanvas.getContext('2d');
+            const { shape, shapeCount, colors, gradients, detail, noise, dynamicBackgrounds } = params;
+            const w = targetCanvas.width;
+            const h = targetCanvas.height;
+            const currentPalette = generatePalette(colors);
+            
+            // 1. Draw Background
+            ctx.clearRect(0, 0, w, h);
+            if (dynamicBackgrounds > 0) {
+                const stops = 2 + Math.floor(dynamicBackgrounds / 10); // Map 0-100 to 2-12 stops
+                const bgGrad = ctx.createRadialGradient(Math.random() * w, Math.random() * h, 0, w / 2, h / 2, w);
+                for (let i = 0; i < stops; i++) {
+                    bgGrad.addColorStop(i / (stops - 1), currentPalette[Math.floor(Math.random() * currentPalette.length)]);
+                }
+                ctx.fillStyle = bgGrad;
+            } else {
+                ctx.fillStyle = '#101323';
+            }
+            ctx.fillRect(0, 0, w, h);
+
+            // 2. Draw Shapes
+            for (let i = 0; i < shapeCount; i++) {
+                const startX = Math.random() * w;
+                const startY = Math.random() * h;
+                const endX = Math.random() * w;
+                const endY = Math.random() * h;
+                
+                // Set style
+                ctx.strokeStyle = currentPalette[i % currentPalette.length];
+                ctx.fillStyle = currentPalette[i % currentPalette.length];
+                if (gradients > 0 && shapeTypes[shape] !== 'Dots') {
+                    const gradStops = 2 + Math.floor(gradients / 10);
+                    const grad = ctx.createLinearGradient(startX, startY, endX, endY);
+                    for (let j = 0; j < gradStops; j++) { grad.addColorStop(j / (gradStops - 1), currentPalette[j % currentPalette.length]); }
+                    ctx.strokeStyle = grad; ctx.fillStyle = grad;
+                }
+                
+                ctx.lineWidth = 2; ctx.beginPath();
+                const distortion = noise;
+
+                switch (shapeTypes[shape]) {
+                    case 'Lines':
+                        const numPoints = Math.max(2, Math.floor(detail / 2));
+                        ctx.moveTo(startX, startY);
+                        for (let j = 0; j < numPoints; j++) {
+                           const segX = startX + (endX - startX) * (j / numPoints);
+                           const segY = startY + (endY - startY) * (j / numPoints);
+                           ctx.lineTo(segX + (Math.random() - 0.5) * distortion, segY + (Math.random() - 0.5) * distortion);
+                        }
+                        ctx.stroke();
+                        break;
+                    
+                    case 'Curved Lines':
+                        const chaos = detail * 0.1;
+                        ctx.moveTo(startX, startY);
+                        ctx.bezierCurveTo(
+                            startX + (Math.random() - 0.5) * w * chaos, startY + (Math.random() - 0.5) * h * chaos,
+                            endX + (Math.random() - 0.5) * w * chaos, endY + (Math.random() - 0.5) * h * chaos,
+                            endX, endY
+                        );
+                        ctx.stroke();
+                        break;
+
+                    case 'Circles':
+                        const radius = Math.random() * (w / 15);
+                        ctx.globalAlpha = Math.max(0.1, Math.random());
+                        ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+                        Math.random() > 0.5 ? ctx.fill() : ctx.stroke();
+                        ctx.globalAlpha = 1;
+                        break;
+
+                    case 'Polygons':
+                        const sides = 3 + Math.floor(detail / 2);
+                        const polyRadius = Math.random() * (w / 10);
+                        ctx.moveTo(startX + polyRadius, startY);
+                        for (let j = 1; j <= sides; j++) {
+                            const angle = j * 2 * Math.PI / sides;
+                            const x = startX + polyRadius * Math.cos(angle) + (Math.random() - 0.5) * distortion;
+                            const y = startY + polyRadius * Math.sin(angle) + (Math.random() - 0.5) * distortion;
+                            ctx.lineTo(x, y);
+                        }
+                        ctx.closePath();
+                        Math.random() > 0.5 ? ctx.fill() : ctx.stroke();
+                        break;
+
+                    case 'Dots':
+                        ctx.arc(startX, startY, 1 + Math.random() * 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                }
+            }
+            
+            // 3. Add Colored Noise Grain
+            if (noise > 0) {
+                const noiseDensity = (w * h) * (noise / 2000);
+                for(let i=0; i < noiseDensity; i++) {
+                    const x = Math.random() * w; const y = Math.random() * h;
+                    ctx.fillStyle = currentPalette[Math.floor(Math.random() * currentPalette.length)];
+                    ctx.globalAlpha = Math.random() * 0.5;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+                ctx.globalAlpha = 1.0;
+            }
+        }
+        
+        // --- HELPER FUNCTIONS & EVENT HANDLERS ---
+        function generatePalette(hueValue) {
+            const baseHue = hueValue * 3.6; const palette = [];
+            for (let i = 0; i < 5; i++) {
+                const hue = (baseHue + (i - 2) * 20) % 360;
+                const saturation = 70 + Math.random() * 20;
+                const lightness = 60 + Math.random() * 20;
+                palette.push(`hsl(${hue < 0 ? 360 + hue : hue}, ${saturation}%, ${lightness}%)`);
+            }
+            return palette;
+        }
+
+        function createSliders() {
+            sliderControlsContainer.innerHTML = sliderConfig.map(s => `
+                <div class="slider-container mb-1">
+                    <div class="flex w-full items-center justify-between mb-2">
+                        <p class="text-white text-base font-medium leading-normal">${s.label}</p>
+                        <p id="${s.id}-value" class="text-white text-sm font-normal leading-normal">
+                            ${s.isDiscrete ? shapeTypes[s.value] : s.value}
+                        </p>
+                    </div>
+                    <input id="${s.id}-slider" type="range" min="${s.min}" max="${s.max}" value="${s.value}" data-param="${s.id}" data-is-discrete="${s.isDiscrete || false}" />
+                </div>
+            `).join('');
+        }
+        
+        function handleSliderInput(e) {
+            const slider = e.target; const param = slider.dataset.param;
+            const value = parseInt(slider.value, 10);
+            artParams[param] = value;
+            const valueDisplay = document.getElementById(`${param}-value`);
+            valueDisplay.textContent = slider.dataset.isDiscrete === 'true' ? shapeTypes[value] : value;
+            const percentage = ((value - slider.min) * 100) / (slider.max - slider.min);
+            slider.style.background = `linear-gradient(to right, #607afb ${percentage}%, #2f396a ${percentage}%)`;
+            render(canvas, artParams);
+        }
+
+        function resizeCanvas() {
+            const container = document.getElementById('canvas-container');
+            const rect = container.getBoundingClientRect();
+            canvas.width = rect.width; canvas.height = rect.height;
+            render(canvas, artParams);
+        }
+        
+        async function handleSave() {
+            saveBtn.disabled = true; saveBtnText.textContent = 'Rendering...';
+            saveBtn.insertAdjacentHTML('beforeend', '<div class="spinner"></div>');
+            await new Promise(resolve => setTimeout(resolve, 50));
+            const offscreenCanvas = document.createElement('canvas');
+            offscreenCanvas.width = 1920; offscreenCanvas.height = 1080;
+            render(offscreenCanvas, artParams);
+            const link = document.createElement('a');
+            link.download = 'generative-art-1920x1080.png';
+            link.href = offscreenCanvas.toDataURL('image/png');
+            link.click();
+            saveBtn.disabled = false; saveBtnText.textContent = 'Save';
+            saveBtn.querySelector('.spinner').remove();
+        }
+
+        // --- INITIALIZATION ---
+        createSliders(); resizeCanvas();
+        sliderControlsContainer.addEventListener('input', handleSliderInput);
+        window.addEventListener('resize', resizeCanvas);
+        saveBtn.addEventListener('click', handleSave);
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            const percentage = ((slider.value - slider.min) * 100) / (slider.max - slider.min);
+            slider.style.background = `linear-gradient(to right, #607afb ${percentage}%, #2f396a ${percentage}%)`;
+        });
+    });
+  </script>
+</body>
+</html>
