@@ -30,7 +30,7 @@ When you're happy with your creation, click the **Save** button to download a 19
 
 ### SCREENSHOTS ###
 
-![Design 01](https://github.com/user-attachments/assets/cab27d8d-b9d7-4a82-8e72-a32c0caab477)
+<img src="https://github.com/user-attachments/assets/cab27d8d-b9d7-4a82-8e72-a32c0caab477)" alt="Generative Art App Screenshot" width="600">
 
 ![Web_Preview](https://github.com/user-attachments/assets/8abfacef-e444-45fd-b23f-2a62e8f588af)
 
