@@ -28,14 +28,32 @@ Simply move the sliders to control the different aspects of the generated artwor
 
 When you're happy with your creation, click the **Save** button to download a 1920x1080 PNG file.
 
+### BUGs ###
+* Save button downloads an image thats not exactly like the generated preview. Right-click on the preview area to save an image directly to a folder.
+
 ### SCREENSHOTS ###
 
-<img src="https://github.com/user-attachments/assets/cab27d8d-b9d7-4a82-8e72-a32c0caab477)" alt="Generative Art App Screenshot" width="600">
+### Original Design Idea: ###
+<img src="https://github.com/user-attachments/assets/cab27d8d-b9d7-4a82-8e72-a32c0caab477" alt="Generative Art App Screenshot" width="300">
 
-![Web_Preview](https://github.com/user-attachments/assets/8abfacef-e444-45fd-b23f-2a62e8f588af)
+### Web App result: ###
+<img src="https://github.com/user-attachments/assets/8abfacef-e444-45fd-b23f-2a62e8f588af" alt="Web App Screenshot" width="300">
 
-![generative-art](https://github.com/user-attachments/assets/6d4838f9-763a-4a13-97b0-a453490e4abd)
+### Saved generated images: ###
+<img src="https://github.com/user-attachments/assets/6d4838f9-763a-4a13-97b0-a453490e4abd" alt="Saved image 01" width="300">
 
-![generative-art (2)](https://github.com/user-attachments/assets/d3a7789c-8218-4b1b-9c80-3246af5ab2fb)
+<img src="https://github.com/user-attachments/assets/d3a7789c-8218-4b1b-9c80-3246af5ab2fb" alt="Saved image 02" width="300">
 
-![generative-art-1920x1080 (12)](https://github.com/user-attachments/assets/e80dee1d-5585-497d-b46c-16fa81a136ce)
+<img src="https://github.com/user-attachments/assets/e80dee1d-5585-497d-b46c-16fa81a136ce" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/59d45253-35d4-49e5-afbf-2124f2169a8e" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/9f294c2c-36c1-4957-b6b5-5aacc92b7da0" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/9c9716d3-dd10-40ff-b70a-bbc3ac4533a1" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/ef7aef09-a7ca-419c-9306-48c209d4ea01" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/fbf05ad4-7a94-4f57-b458-c7395e621f86" alt="Saved image 03" width="300">
+
+<img src="https://github.com/user-attachments/assets/fcf4cd5f-c49a-4b1d-94b1-90bd5b5206e6" alt="Saved image 03" width="300">
